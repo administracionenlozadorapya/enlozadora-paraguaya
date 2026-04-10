@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Nuevo Movimiento — Enlozadora Paraguaya</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:Arial,sans-serif;background:#f0f2f5;color:#1e293b;min-height:100vh;padding-bottom:80px;max-width:480px;margin:0 auto}
+
+/* HEADER */
+.hdr{background:linear-gradient(135deg,#1B2D6B 0%,#2540A0 100%);padding:0;position:sticky;top:0;z-index:100;box-shadow:0 3px 16px rgba(27,45,107,.4)}
+.hdr-top{display:flex;align-items:center;gap:12px;padding:12px 16px}
+.hdr-logo{width:44px;height:44px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;padding:4px;flex-shrink:0}
+.hdr-logo img{width:100%;height:100%;object-fit:contain}
+.hdr-text .hdr-title{color:#fff;font-size:15px;font-weight:700;letter-spacing:.3px}
+.hdr-text .hdr-sub{color:rgba(255,255,255,.65);font-size:11px;margin-top:2px}
+.hdr-stripe{height:4px;background:linear-gradient(90deg,#C0392B 0%,#E74C3C 50%,#C0392B 100%)}
+
+/* PROGRESS */
+.progress-bar{background:rgba(255,255,255,.15);padding:8px 16px 10px}
+.steps{display:flex;gap:6px;margin-bottom:6px}
+.step-pill{flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,.3);transition:background .3s}
+.step-pill.done{background:#E74C3C}
+.step-pill.active{background:#fff}
+.step-label{color:rgba(255,255,255,.8);font-size:11px}
+
+/* CARDS */
+.card{background:#fff;border-radius:14px;border:1px solid #e2e8f0;overflow:hidden;margin:12px 14px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.card-hdr{padding:12px 16px;display:flex;align-items:center;gap:10px;border-bottom:2px solid #f1f5f9}
+.card-hdr-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.card-hdr h2{font-size:13px;font-weight:700;color:#1B2D6B}
+.card-hdr p{font-size:11px;color:#64748b;margin-top:1px}
+
+/* FIELDS */
+.fld{padding:11px 16px;border-bottom:1px solid #f8fafc}
+.fld:last-child{border:none}
+.fld label{display:block;font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.fld label .req{color:#C0392B;margin-left:2px}
+input[type=text],input[type=date],input[type=number],select,textarea{width:100%;padding:11px 13px;border:1.5px solid #e2e8f0;border-radius:10px;font-family:Arial,sans-serif;font-size:15px;color:#1e293b;background:#f8fafc;outline:none;-webkit-appearance:none;appearance:none;transition:border .2s}
+input:focus,select:focus,textarea:focus{border-color:#1B2D6B;background:#fff;box-shadow:0 0 0 3px rgba(27,45,107,.1)}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:34px}
+
+/* TIPO BUTTONS */
+.tipo-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:11px 16px}
+.tipo-btn{padding:12px 8px;border-radius:10px;border:2px solid #e2e8f0;background:#f8fafc;font-family:Arial,sans-serif;font-size:12px;font-weight:700;cursor:pointer;text-align:center;transition:all .2s;line-height:1.4}
+.tipo-btn.active{border-color:#1B2D6B;background:#EEF2FF;color:#1B2D6B}
+.tipo-btn:active{transform:scale(.97)}
+
+/* CONDICION BUTTONS */
+.cond-btns{display:flex;gap:8px;padding:11px 16px}
+.cond-btn{flex:1;padding:13px;border-radius:10px;border:2px solid #e2e8f0;background:#f8fafc;font-family:Arial,sans-serif;font-size:14px;font-weight:700;cursor:pointer;text-align:center;transition:all .2s}
+.cond-btn.active-contado{border-color:#1D6B3A;background:#D4EDDA;color:#1D6B3A}
+.cond-btn.active-credito{border-color:#C0392B;background:#FADBD8;color:#C0392B}
+
+/* SALDO BOX */
+.saldo-box{background:linear-gradient(135deg,#FADBD8,#FDEBD0);border-radius:10px;padding:12px 16px;margin:0 16px 8px;display:flex;justify-content:space-between;align-items:center;border:1px solid #F1948A}
+.saldo-box span{font-size:12px;color:#C0392B;font-weight:600}
+.saldo-box strong{font-size:20px;color:#C0392B;font-weight:700}
+
+/* RESUMEN */
+.resumen{display:none;margin:12px 14px;background:#fff;border-radius:14px;border:2px solid #1B2D6B;overflow:hidden}
+.resumen.show{display:block}
+.resumen-hdr{background:#1B2D6B;padding:12px 16px;display:flex;align-items:center;gap:8px}
+.resumen-hdr span{color:#fff;font-weight:700;font-size:13px}
+.resumen-row{display:flex;justify-content:space-between;padding:10px 16px;border-bottom:1px solid #f1f5f9}
+.resumen-row:last-child{border:none}
+.resumen-lbl{font-size:12px;color:#64748b;font-weight:600}
+.resumen-val{font-size:12px;color:#1B2D6B;font-weight:700;text-align:right;max-width:60%}
+
+/* NAV BUTTONS */
+.navbtns{position:fixed;bottom:0;left:0;right:0;max-width:480px;margin:0 auto;display:flex;gap:10px;padding:12px 14px;background:rgba(240,242,245,.97);backdrop-filter:blur(8px);border-top:1px solid #e2e8f0;z-index:50}
+.btn{flex:1;padding:14px;border-radius:12px;font-size:15px;font-weight:700;font-family:Arial,sans-serif;border:none;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn:active{transform:scale(.97)}
+.btn-prev{background:#e2e8f0;color:#475569;flex:0.6}
+.btn-next{background:#1B2D6B;color:#fff;box-shadow:0 4px 14px rgba(27,45,107,.35)}
+.btn-send{background:linear-gradient(135deg,#1B2D6B,#2540A0);color:#fff;box-shadow:0 4px 14px rgba(27,45,107,.35)}
+.btn:disabled{background:#94a3b8;box-shadow:none;cursor:not-allowed}
+
+/* STEPS */
+.step{display:none}.step.active{display:block}
+
+/* ERRORS */
+.errmsg{font-size:11px;color:#C0392B;margin-top:4px;display:none}
+.errmsg.show{display:block}
+
+/* SUCCESS */
+.success{display:none;text-align:center;padding:50px 20px}
+.success.show{display:block}
+.success-logo{width:80px;height:80px;border-radius:50%;background:#fff;border:3px solid #1B2D6B;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;padding:8px;animation:pop .5s cubic-bezier(.175,.885,.32,1.275)}
+.success-logo img{width:100%;height:100%;object-fit:contain}
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+.success h2{font-size:20px;color:#1B2D6B;margin-bottom:8px;font-weight:700}
+.success p{font-size:14px;color:#64748b;line-height:1.6}
+.btn-nuevo{margin-top:20px;background:#1B2D6B;color:#fff;border:none;padding:14px 24px;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:Arial,sans-serif;width:100%;max-width:300px}
+
+.extra-hide{display:none}.extra-hide.show{display:block}
+.hint{font-size:11px;color:#64748b;padding:6px 16px;font-style:italic}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-top">
+    <div class="hdr-logo">
+      <img src="data:image/png;base64,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" alt="Enlozadora Paraguaya">
+    </div>
+    <div class="hdr-text">
+      <div class="hdr-title">Nuevo Movimiento</div>
+      <div class="hdr-sub">Enlozadora Paraguaya</div>
+    </div>
+  </div>
+  <div class="hdr-stripe"></div>
+  <div class="progress-bar">
+    <div class="steps">
+      <div class="step-pill active" id="pill-1"></div>
+      <div class="step-pill" id="pill-2"></div>
+      <div class="step-pill" id="pill-3"></div>
+    </div>
+    <div class="step-label" id="step-label">Paso 1 de 3 — Datos básicos</div>
+  </div>
+</div>
+
+<!-- STEP 1 -->
+<div class="step active" id="step-1">
+  <div class="card">
+    <div class="card-hdr">
+      <div class="card-hdr-icon" style="background:#EEF2FF">🏪</div>
+      <div><h2>Datos básicos</h2><p>Sucursal, fecha y número de boleta</p></div>
+    </div>
+    <div class="fld">
+      <label>Sucursal <span class="req">*</span></label>
+      <select id="sucursal">
+        <option value="">— Seleccionar sucursal —</option>
+        <option>CAPIATA</option>
+        <option>SAN LORENZO</option>
+        <option>SANTA TERESA</option>
+        <option>LUQUE</option>
+        <option>MARIANO ROQUE ALONSO</option>
+        <option>CIUDAD DEL ESTE</option>
+        <option>ENCARNACION</option>
+        <option>FABRICA</option>
+      </select>
+      <div class="errmsg" id="e-suc">Seleccioná la sucursal</div>
+    </div>
+    <div class="fld">
+      <label>Fecha <span class="req">*</span></label>
+      <input type="date" id="fecha">
+    </div>
+    <div class="fld">
+      <label>N° Boleta</label>
+      <input type="text" id="boleta" placeholder="Ej: B-0001">
+    </div>
+    <div class="fld">
+      <label>Cliente</label>
+      <input type="text" id="cliente" placeholder="Nombre del cliente">
+    </div>
+  </div>
+</div>
+
+<!-- STEP 2 -->
+<div class="step" id="step-2">
+  <div class="card">
+    <div class="card-hdr">
+      <div class="card-hdr-icon" style="background:#EEF2FF">🛒</div>
+      <div><h2>Tipo de operación</h2><p>¿Qué se vendió o qué servicio se hizo?</p></div>
+    </div>
+    <div class="fld" style="padding-bottom:4px"><label>Tipo <span class="req">*</span></label></div>
+    <div class="tipo-grid">
+      <button class="tipo-btn" onclick="setTipo('Venta Producto')">📦 Venta Producto</button>
+      <button class="tipo-btn" onclick="setTipo('Servicio Enlozado')">🔥 Servicio Enlozado</button>
+      <button class="tipo-btn" onclick="setTipo('Servicio Laser')">⚡ Servicio Láser</button>
+      <button class="tipo-btn" onclick="setTipo('Servicio Corte')">⚙️ Servicio Corte</button>
+    </div>
+    <div class="errmsg" id="e-tipo" style="padding:0 16px 8px">Seleccioná el tipo</div>
+
+    <!-- Venta producto -->
+    <div class="extra-hide" id="f-venta">
+      <div class="fld">
+        <label>Producto <span class="req">*</span></label>
+        <select id="producto" onchange="toggleOtro(this.value)">
+          <option value="">— Seleccionar producto —</option>
+          <optgroup label="🔥 Parrillas">
+            <option>Parrilla Tambor Chica - Mesada Madera</option>
+            <option>Parrilla Tambor Mediana - Mesada Madera</option>
+            <option>Parrilla Tambor Mediana - Mesada Chapa</option>
+            <option>Parrilla Tambor Grande Normal</option>
+            <option>Parrilla Tambor Grande Premium</option>
+            <option>Parrilla Medio Tambor</option>
+            <option>Parrilla Medio Tambor con Rueditas</option>
+            <option>Parrilla Circular 50cm sin Ruedas</option>
+            <option>Parrilla Circular 50cm con Ruedas</option>
+            <option>Parrilla de Piso Club Libertad</option>
+            <option>Parrilla de Piso Club Guaraní</option>
+            <option>Parrilla de Piso Club Olimpia</option>
+            <option>Parrilla de Piso Club Cerro</option>
+            <option>Parrilla de Piso Club Luque</option>
+            <option>Parrilla 40cm altura 83cm</option>
+            <option>Parrilla 40cm 3 Patas con Porta Costillar</option>
+            <option>Parrillita de Mesa Carbonera 20x26</option>
+            <option>Parrillita de Mesa Carbonera 39x29</option>
+            <option>Parrillita de Mesa Verde con Marrón</option>
+            <option>Fogonero Chico 30cm</option>
+            <option>Fogonero Mediano 54cm</option>
+            <option>Fogonero Grande 59cm</option>
+            <option>Fogonero Cuadrado con Accesorios</option>
+          </optgroup>
+          <optgroup label="🛠️ Kit Parrillero">
+            <option>Palita (modelo nuevo)</option>
+            <option>Atizador (modelo nuevo)</option>
+            <option>Pinza para Carbón</option>
+            <option>Combo Parrillero</option>
+            <option>Smasher 10cm</option>
+            <option>Smasher 11cm</option>
+            <option>Smasher 12cm</option>
+            <option>Espadín 72cm</option>
+            <option>Espumadera</option>
+            <option>Cucharón</option>
+          </optgroup>
+          <optgroup label="🍳 Bandejas y Asaderas">
+            <option>Asadera 23x33</option><option>Asadera 30x21</option><option>Asadera 41x31</option>
+            <option>Asadera 46x59</option><option>Asadera 59x46</option>
+            <option>Bandeja 22x22</option><option>Bandeja 25x25</option><option>Bandeja 27x27</option>
+            <option>Bandeja Rica 37x21</option><option>Bandeja 35x29</option>
+            <option>Bandeja 40x40</option><option>Bandeja 40x51</option><option>Bandeja 44x30</option>
+            <option>Bandeja 49x39</option><option>Bandeja 50x50</option>
+            <option>Bandeja 60x40</option><option>Bandeja 60x45</option>
+            <option>Bandeja Panadera 59x70</option><option>Bandeja Panadera 70x58</option>
+            <option>Budinera 25x13</option><option>Budinera 30x12</option>
+            <option>Budinera 35x10</option><option>Budinera 36x11</option><option>Budinera 23x13</option>
+            <option>Bandeja Pizzera 29cm</option><option>Bandeja Pizzera 31cm</option>
+            <option>Bandeja para Donas 35x26</option><option>Molde Cupcake</option>
+            <option>Chupinera Individual</option><option>Chupinera 21x27</option>
+            <option>Chupinera 35x26</option><option>Chupinera 36x26</option><option>Chupinera 60x40</option>
+            <option>Plancheta Mini 18x12</option><option>Plancheta 40x18</option>
+            <option>Plancheta 45x30</option><option>Plancheta 46x30</option><option>Plancheta 50x26</option>
+            <option>Provoletera</option><option>Wok 32cm</option><option>Wok 36cm</option>
+            <option>Colador 26cm</option><option>Ensaladera</option><option>Bowl con Tapa</option><option>Cazuelita 15cm</option>
+          </optgroup>
+          <optgroup label="⚫ Discos y Paelleras">
+            <option>Disco 35cm</option><option>Disco 51cm sin Tapa</option><option>Disco 51cm con Tapa</option>
+            <option>Disco 52cm</option><option>Disco 53cm</option><option>Disco 58x58 con Tapa</option>
+            <option>Disco 81cm (Arado)</option><option>Paellera Personal 16cm</option>
+            <option>Paellera 35cm con Tapa</option><option>Paellera 50cm</option>
+            <option>Soporte para Disco</option><option>Porta Costillar</option>
+          </optgroup>
+          <optgroup label="☕ Jarritos y Jarras">
+            <option>Jarrito N°8 sin Diseño</option><option>Jarrito N°8 con Diseño</option>
+            <option>Jarrito N°9 sin Diseño</option><option>Jarrito N°9 con Diseño</option>
+            <option>Jarrito N°10 sin Diseño</option><option>Jarrito N°10 con Diseño</option>
+            <option>Jarra 1 Litro sin Diseño</option><option>Jarra 1 Litro con Diseño</option>
+            <option>Lechera</option><option>Materito</option>
+            <option>Chopera sin Diseño</option><option>Chopera con Diseño</option>
+            <option>Compotera</option><option>Salserito Chico</option><option>Salserito Grande</option>
+          </optgroup>
+          <optgroup label="🍽️ Platos">
+            <option>Plato Hondo 23cm</option><option>Plato Hondo 25cm</option><option>Plato Hondo 28cm</option>
+            <option>Plato Playo 23cm</option><option>Plato Playo 25cm</option><option>Plato Playo 28cm</option>
+            <option>Plato para Asado grande</option><option>Platito 15cm</option>
+            <option>Plato Nidal con Salsero</option><option>Plato Olimpia 23cm</option>
+          </optgroup>
+          <optgroup label="🫖 Tazas">
+            <option>Taza Enlozada sin Diseño</option><option>Taza Enlozada con Diseño</option>
+          </optgroup>
+          <optgroup label="🪧 Carteles y Decoración">
+            <option>Cartel Parrilla 100% Paraguaya</option><option>Cartel Coca Cola</option>
+            <option>Cartel El Mejor Asado lo Hace mi Papá</option><option>Cartel Asado otros modelos</option>
+            <option>Cartel para Jardín grande</option><option>Cartelito para Jardín pequeño</option>
+            <option>Cartel WiFi</option><option>Cartel Sanitario</option><option>Cartel Harley Davidson</option>
+            <option>Cuadro Quincho 20x20</option><option>Cuadro Quincho 30x20</option><option>Cuadro Quincho 40x30</option>
+            <option>Crucifijo Oxidado</option><option>Porta Llaves diseño Búho</option>
+            <option>Porta Espiral</option><option>Porta Velas</option><option>Porta Servilletas</option>
+            <option>Porta Plato</option><option>Base de Madera para Parrilla</option>
+            <option>Tabla de Madera para Picar</option><option>Trípode</option><option>Delantal de Jeans</option>
+          </optgroup>
+          <optgroup label="➕ Otro">
+            <option value="otro">Otro (escribir)</option>
+          </optgroup>
+        </select>
+        <div class="errmsg" id="e-prod">Seleccioná el producto</div>
+      </div>
+      <div class="extra-hide" id="f-otro">
+        <div class="fld">
+          <label>Especificá el producto</label>
+          <input type="text" id="otro-desc" placeholder="Nombre del producto">
+        </div>
+      </div>
+      <div class="fld">
+        <label>Cantidad</label>
+        <input type="number" id="cantidad" value="1" min="1">
+      </div>
+    </div>
+
+    <!-- Servicio enlozado -->
+    <div class="extra-hide" id="f-enlozado">
+      <div class="fld">
+        <label>Descripción del servicio <span class="req">*</span></label>
+        <input type="text" id="desc-enlozado" placeholder="Ej: Enlozado parrilla tambor grande, negro">
+      </div>
+    </div>
+
+    <!-- Otros servicios -->
+    <div class="extra-hide" id="f-servicio">
+      <div class="fld">
+        <label>Descripción del servicio <span class="req">*</span></label>
+        <input type="text" id="desc-servicio" placeholder="Descripción del trabajo realizado">
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hdr">
+      <div class="card-hdr-icon" style="background:#EEF2FF">💰</div>
+      <div><h2>Precio y condición</h2></div>
+    </div>
+    <div class="fld">
+      <label>Total (Gs) <span class="req">*</span></label>
+      <input type="number" id="total" placeholder="0" min="0" oninput="calcSaldo()">
+      <div class="errmsg" id="e-total">Ingresá el monto</div>
+    </div>
+    <div class="fld" style="padding-bottom:4px"><label>Condición <span class="req">*</span></label></div>
+    <div class="cond-btns">
+      <button class="cond-btn" id="btn-contado" onclick="setCond('Contado')">💵 Contado</button>
+      <button class="cond-btn" id="btn-credito" onclick="setCond('Credito')">💳 Crédito</button>
+    </div>
+    <div class="extra-hide" id="f-entrega">
+      <div class="fld">
+        <label>Entrega inicial (Gs)</label>
+        <input type="number" id="entrega" placeholder="0" min="0" oninput="calcSaldo()">
+      </div>
+    </div>
+    <div class="saldo-box" id="saldo-box" style="display:none">
+      <span>Saldo pendiente:</span>
+      <strong id="saldo-display">Gs. 0</strong>
+    </div>
+    <div class="fld">
+      <label>Observaciones</label>
+      <textarea id="obs" rows="2" placeholder="Cualquier detalle adicional..." style="resize:none"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 3 - RESUMEN -->
+<div class="step" id="step-3">
+  <div class="resumen show" id="resumen">
+    <div class="resumen-hdr">
+      <span>📋 Resumen del movimiento</span>
+    </div>
+    <div class="resumen-row"><span class="resumen-lbl">Sucursal</span><span class="resumen-val" id="s-suc">—</span></div>
+    <div class="resumen-row"><span class="resumen-lbl">Fecha</span><span class="resumen-val" id="s-fecha">—</span></div>
+    <div class="resumen-row"><span class="resumen-lbl">Tipo</span><span class="resumen-val" id="s-tipo">—</span></div>
+    <div class="resumen-row"><span class="resumen-lbl">Descripción</span><span class="resumen-val" id="s-desc">—</span></div>
+    <div class="resumen-row"><span class="resumen-lbl">Total</span><span class="resumen-val" id="s-total">—</span></div>
+    <div class="resumen-row"><span class="resumen-lbl">Condición</span><span class="resumen-val" id="s-cond">—</span></div>
+    <div class="resumen-row" id="s-entrega-row"><span class="resumen-lbl">Entrega</span><span class="resumen-val" id="s-entrega">—</span></div>
+    <div class="resumen-row" id="s-saldo-row"><span class="resumen-lbl">Saldo pendiente</span><span class="resumen-val" id="s-saldo" style="color:#C0392B">—</span></div>
+  </div>
+  <div style="padding:0 14px">
+    <p style="font-size:12px;color:#64748b;text-align:center;padding:8px 0">Verificá los datos antes de enviar</p>
+  </div>
+</div>
+
+<!-- SUCCESS -->
+<div class="success" id="success">
+  <div class="success-logo">
+    <img src="data:image/png;base64,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" alt="Enlozadora Paraguaya">
+  </div>
+  <h2>¡Movimiento registrado!</h2>
+  <p>Los datos fueron enviados correctamente<br>a administración.</p>
+  <button class="btn-nuevo" onclick="resetForm()">📋 Registrar otro movimiento</button>
+</div>
+
+<div class="navbtns" id="navbtns">
+  <button class="btn btn-prev" id="btn-prev" onclick="prev()" style="display:none">← Atrás</button>
+  <button class="btn btn-next" id="btn-next" onclick="next()">Siguiente →</button>
+</div>
+
+<script>
+var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx1X7Y8FIWe-XS-y9egR5Tvmv0aoE6rbJBQRwRP9s5vI71POXyBJZbqccaHIxuWowrv/exec";
+var step = 1;
+var tipo = '';
+var condicion = '';
+var LABELS = ['Datos básicos','Operación y precio','Confirmar'];
+
+function goTo(n) {
+  document.getElementById('step-'+step).classList.remove('active');
+  document.getElementById('pill-'+step).classList.remove('active');
+  document.getElementById('pill-'+step).classList.add('done');
+  step = n;
+  document.getElementById('step-'+step).classList.add('active');
+  document.getElementById('pill-'+step).classList.add('active');
+  document.getElementById('step-label').textContent = 'Paso '+step+' de 3 — '+LABELS[step-1];
+  document.getElementById('btn-prev').style.display = step>1?'':'none';
+  document.getElementById('btn-next').textContent = step===3?'✅ Enviar movimiento':'Siguiente →';
+  document.getElementById('btn-next').className = step===3?'btn btn-send':'btn btn-next';
+  window.scrollTo(0,0);
+}
+
+function prev() { if(step>1) goTo(step-1); }
+
+function next() {
+  if(step===3){ enviar(); return; }
+  if(step===1){
+    if(!document.getElementById('sucursal').value){ document.getElementById('e-suc').classList.add('show'); return; }
+    document.getElementById('e-suc').classList.remove('show');
+  }
+  if(step===2){
+    if(!tipo){ document.getElementById('e-tipo').classList.add('show'); return; }
+    document.getElementById('e-tipo').classList.remove('show');
+    if(!document.getElementById('total').value){ document.getElementById('e-total').classList.add('show'); return; }
+    document.getElementById('e-total').classList.remove('show');
+    if(!condicion){ alert('Seleccioná la condición de pago'); return; }
+    // Fill resumen
+    document.getElementById('s-suc').textContent = document.getElementById('sucursal').value;
+    document.getElementById('s-fecha').textContent = document.getElementById('fecha').value;
+    document.getElementById('s-tipo').textContent = tipo;
+    document.getElementById('s-desc').textContent = getDesc()||'—';
+    var tot = parseFloat(document.getElementById('total').value)||0;
+    var ent = parseFloat(document.getElementById('entrega').value)||0;
+    var sal = Math.max(0,tot-ent);
+    document.getElementById('s-total').textContent = 'Gs. '+tot.toLocaleString('es-PY');
+    document.getElementById('s-cond').textContent = condicion;
+    document.getElementById('s-entrega-row').style.display = condicion==='Credito'?'':'none';
+    document.getElementById('s-saldo-row').style.display = condicion==='Credito'?'':'none';
+    if(condicion==='Credito'){
+      document.getElementById('s-entrega').textContent = 'Gs. '+ent.toLocaleString('es-PY');
+      document.getElementById('s-saldo').textContent = 'Gs. '+sal.toLocaleString('es-PY');
+    }
+  }
+  goTo(step+1);
+}
+
+function setTipo(t) {
+  tipo = t;
+  document.querySelectorAll('.tipo-btn').forEach(function(b){ b.classList.remove('active'); });
+  event.target.closest('.tipo-btn').classList.add('active');
+  ['f-venta','f-enlozado','f-servicio'].forEach(function(id){ document.getElementById(id).classList.remove('show'); });
+  if(t==='Venta Producto') document.getElementById('f-venta').classList.add('show');
+  else if(t==='Servicio Enlozado') document.getElementById('f-enlozado').classList.add('show');
+  else document.getElementById('f-servicio').classList.add('show');
+}
+
+function toggleOtro(v) {
+  document.getElementById('f-otro').classList.toggle('show', v==='otro');
+}
+
+function setCond(c) {
+  condicion = c;
+  document.getElementById('btn-contado').className = 'cond-btn'+(c==='Contado'?' active-contado':'');
+  document.getElementById('btn-credito').className = 'cond-btn'+(c==='Credito'?' active-credito':'');
+  document.getElementById('f-entrega').classList.toggle('show', c==='Credito');
+  document.getElementById('saldo-box').style.display = c==='Credito'?'flex':'none';
+  calcSaldo();
+}
+
+function calcSaldo() {
+  var tot = parseFloat(document.getElementById('total').value)||0;
+  var ent = parseFloat(document.getElementById('entrega').value)||0;
+  document.getElementById('saldo-display').textContent = 'Gs. '+Math.max(0,tot-ent).toLocaleString('es-PY');
+}
+
+function getDesc() {
+  if(tipo==='Venta Producto'){
+    var p = document.getElementById('producto').value;
+    return p==='otro' ? document.getElementById('otro-desc').value : p;
+  }
+  if(tipo==='Servicio Enlozado') return document.getElementById('desc-enlozado').value;
+  return document.getElementById('desc-servicio').value;
+}
+
+async function enviar() {
+  var btn = document.getElementById('btn-next');
+  btn.textContent='⏳ Enviando...'; btn.disabled=true;
+  var tot = parseFloat(document.getElementById('total').value)||0;
+  var ent = parseFloat(document.getElementById('entrega').value)||0;
+  var sal = condicion==='Credito'?Math.max(0,tot-ent):0;
+  var params = new URLSearchParams({
+    tipo_formulario:'movimiento',
+    sucursal:document.getElementById('sucursal').value,
+    fecha:document.getElementById('fecha').value,
+    boleta:document.getElementById('boleta').value,
+    cliente:document.getElementById('cliente').value,
+    tipo:tipo,
+    descripcion:getDesc(),
+    cantidad:document.getElementById('cantidad')?document.getElementById('cantidad').value:1,
+    condicion:condicion,
+    total:tot, entrega:ent, saldo:sal,
+    observaciones:document.getElementById('obs').value
+  });
+  try {
+    await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',body:params});
+    document.getElementById('step-3').classList.remove('active');
+    document.getElementById('navbtns').style.display='none';
+    document.querySelector('.progress-bar').style.display='none';
+    document.getElementById('success').classList.add('show');
+    window.scrollTo(0,0);
+  } catch(err) {
+    btn.textContent='✅ Enviar movimiento'; btn.disabled=false;
+    alert('Error al enviar. Revisá tu conexión.');
+  }
+}
+
+function resetForm() {
+  location.reload();
+}
+
+document.getElementById('fecha').valueAsDate = new Date();
+</script>
+</body>
+</html>
