@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -39,7 +40,7 @@ body{font-family:Arial,sans-serif;background:#f0f2f5;color:#1e293b;min-height:10
 .fld label .req{color:#C0392B;margin-left:2px}
 input[type=text],input[type=date],input[type=number],select,textarea{width:100%;padding:11px 13px;border:1.5px solid #e2e8f0;border-radius:10px;font-family:Arial,sans-serif;font-size:15px;color:#1e293b;background:#f8fafc;outline:none;-webkit-appearance:none;appearance:none;transition:border .2s}
 input:focus,select:focus,textarea:focus{border-color:#1B2D6B;background:#fff;box-shadow:0 0 0 3px rgba(27,45,107,.1)}
-select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:34px}
+select{background-image:url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘12’ height=‘8’ viewBox=‘0 0 12 8’%3E%3Cpath d=‘M1 1l5 5 5-5’ stroke=’%2364748b’ stroke-width=‘1.5’ fill=‘none’ stroke-linecap=‘round’/%3E%3C/svg%3E”);background-repeat:no-repeat;background-position:right 12px center;padding-right:34px}
 
 /* TIPO BUTTONS */
 .tipo-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:11px 16px}
@@ -97,6 +98,7 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 .extra-hide{display:none}.extra-hide.show{display:block}
 .hint{font-size:11px;color:#64748b;padding:6px 16px;font-style:italic}
 </style>
+
 </head>
 <body>
 
@@ -122,6 +124,7 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 </div>
 
 <!-- STEP 1 -->
+
 <div class="step active" id="step-1">
   <div class="card">
     <div class="card-hdr">
@@ -159,6 +162,7 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 </div>
 
 <!-- STEP 2 -->
+
 <div class="step" id="step-2">
   <div class="card">
     <div class="card-hdr">
@@ -166,146 +170,155 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
       <div><h2>Tipo de operación</h2><p>¿Qué se vendió o qué servicio se hizo?</p></div>
     </div>
     <div class="fld" style="padding-bottom:4px"><label>Tipo <span class="req">*</span></label></div>
-    <div class="tipo-grid">
+    <div class="tipo-grid" style="grid-template-columns:1fr 1fr">
       <button class="tipo-btn" onclick="setTipo('Venta Producto')">📦 Venta Producto</button>
       <button class="tipo-btn" onclick="setTipo('Servicio Enlozado')">🔥 Servicio Enlozado</button>
-      <button class="tipo-btn" onclick="setTipo('Servicio Laser')">⚡ Servicio Láser</button>
-      <button class="tipo-btn" onclick="setTipo('Servicio Corte')">⚙️ Servicio Corte</button>
     </div>
     <div class="errmsg" id="e-tipo" style="padding:0 16px 8px">Seleccioná el tipo</div>
 
-    <!-- Venta producto -->
-    <div class="extra-hide" id="f-venta">
-      <div class="fld">
-        <label>Producto <span class="req">*</span></label>
-        <select id="producto" onchange="toggleOtro(this.value)">
-          <option value="">— Seleccionar producto —</option>
-          <optgroup label="🔥 Parrillas">
-            <option>Parrilla Tambor Chica - Mesada Madera</option>
-            <option>Parrilla Tambor Mediana - Mesada Madera</option>
-            <option>Parrilla Tambor Mediana - Mesada Chapa</option>
-            <option>Parrilla Tambor Grande Normal</option>
-            <option>Parrilla Tambor Grande Premium</option>
-            <option>Parrilla Medio Tambor</option>
-            <option>Parrilla Medio Tambor con Rueditas</option>
-            <option>Parrilla Circular 50cm sin Ruedas</option>
-            <option>Parrilla Circular 50cm con Ruedas</option>
-            <option>Parrilla de Piso Club Libertad</option>
-            <option>Parrilla de Piso Club Guaraní</option>
-            <option>Parrilla de Piso Club Olimpia</option>
-            <option>Parrilla de Piso Club Cerro</option>
-            <option>Parrilla de Piso Club Luque</option>
-            <option>Parrilla 40cm altura 83cm</option>
-            <option>Parrilla 40cm 3 Patas con Porta Costillar</option>
-            <option>Parrillita de Mesa Carbonera 20x26</option>
-            <option>Parrillita de Mesa Carbonera 39x29</option>
-            <option>Parrillita de Mesa Verde con Marrón</option>
-            <option>Fogonero Chico 30cm</option>
-            <option>Fogonero Mediano 54cm</option>
-            <option>Fogonero Grande 59cm</option>
-            <option>Fogonero Cuadrado con Accesorios</option>
-          </optgroup>
-          <optgroup label="🛠️ Kit Parrillero">
-            <option>Palita (modelo nuevo)</option>
-            <option>Atizador (modelo nuevo)</option>
-            <option>Pinza para Carbón</option>
-            <option>Combo Parrillero</option>
-            <option>Smasher 10cm</option>
-            <option>Smasher 11cm</option>
-            <option>Smasher 12cm</option>
-            <option>Espadín 72cm</option>
-            <option>Espumadera</option>
-            <option>Cucharón</option>
-          </optgroup>
-          <optgroup label="🍳 Bandejas y Asaderas">
-            <option>Asadera 23x33</option><option>Asadera 30x21</option><option>Asadera 41x31</option>
-            <option>Asadera 46x59</option><option>Asadera 59x46</option>
-            <option>Bandeja 22x22</option><option>Bandeja 25x25</option><option>Bandeja 27x27</option>
-            <option>Bandeja Rica 37x21</option><option>Bandeja 35x29</option>
-            <option>Bandeja 40x40</option><option>Bandeja 40x51</option><option>Bandeja 44x30</option>
-            <option>Bandeja 49x39</option><option>Bandeja 50x50</option>
-            <option>Bandeja 60x40</option><option>Bandeja 60x45</option>
-            <option>Bandeja Panadera 59x70</option><option>Bandeja Panadera 70x58</option>
-            <option>Budinera 25x13</option><option>Budinera 30x12</option>
-            <option>Budinera 35x10</option><option>Budinera 36x11</option><option>Budinera 23x13</option>
-            <option>Bandeja Pizzera 29cm</option><option>Bandeja Pizzera 31cm</option>
-            <option>Bandeja para Donas 35x26</option><option>Molde Cupcake</option>
-            <option>Chupinera Individual</option><option>Chupinera 21x27</option>
-            <option>Chupinera 35x26</option><option>Chupinera 36x26</option><option>Chupinera 60x40</option>
-            <option>Plancheta Mini 18x12</option><option>Plancheta 40x18</option>
-            <option>Plancheta 45x30</option><option>Plancheta 46x30</option><option>Plancheta 50x26</option>
-            <option>Provoletera</option><option>Wok 32cm</option><option>Wok 36cm</option>
-            <option>Colador 26cm</option><option>Ensaladera</option><option>Bowl con Tapa</option><option>Cazuelita 15cm</option>
-          </optgroup>
-          <optgroup label="⚫ Discos y Paelleras">
-            <option>Disco 35cm</option><option>Disco 51cm sin Tapa</option><option>Disco 51cm con Tapa</option>
-            <option>Disco 52cm</option><option>Disco 53cm</option><option>Disco 58x58 con Tapa</option>
-            <option>Disco 81cm (Arado)</option><option>Paellera Personal 16cm</option>
-            <option>Paellera 35cm con Tapa</option><option>Paellera 50cm</option>
-            <option>Soporte para Disco</option><option>Porta Costillar</option>
-          </optgroup>
-          <optgroup label="☕ Jarritos y Jarras">
-            <option>Jarrito N°8 sin Diseño</option><option>Jarrito N°8 con Diseño</option>
-            <option>Jarrito N°9 sin Diseño</option><option>Jarrito N°9 con Diseño</option>
-            <option>Jarrito N°10 sin Diseño</option><option>Jarrito N°10 con Diseño</option>
-            <option>Jarra 1 Litro sin Diseño</option><option>Jarra 1 Litro con Diseño</option>
-            <option>Lechera</option><option>Materito</option>
-            <option>Chopera sin Diseño</option><option>Chopera con Diseño</option>
-            <option>Compotera</option><option>Salserito Chico</option><option>Salserito Grande</option>
-          </optgroup>
-          <optgroup label="🍽️ Platos">
-            <option>Plato Hondo 23cm</option><option>Plato Hondo 25cm</option><option>Plato Hondo 28cm</option>
-            <option>Plato Playo 23cm</option><option>Plato Playo 25cm</option><option>Plato Playo 28cm</option>
-            <option>Plato para Asado grande</option><option>Platito 15cm</option>
-            <option>Plato Nidal con Salsero</option><option>Plato Olimpia 23cm</option>
-          </optgroup>
-          <optgroup label="🫖 Tazas">
-            <option>Taza Enlozada sin Diseño</option><option>Taza Enlozada con Diseño</option>
-          </optgroup>
-          <optgroup label="🪧 Carteles y Decoración">
-            <option>Cartel Parrilla 100% Paraguaya</option><option>Cartel Coca Cola</option>
-            <option>Cartel El Mejor Asado lo Hace mi Papá</option><option>Cartel Asado otros modelos</option>
-            <option>Cartel para Jardín grande</option><option>Cartelito para Jardín pequeño</option>
-            <option>Cartel WiFi</option><option>Cartel Sanitario</option><option>Cartel Harley Davidson</option>
-            <option>Cuadro Quincho 20x20</option><option>Cuadro Quincho 30x20</option><option>Cuadro Quincho 40x30</option>
-            <option>Crucifijo Oxidado</option><option>Porta Llaves diseño Búho</option>
-            <option>Porta Espiral</option><option>Porta Velas</option><option>Porta Servilletas</option>
-            <option>Porta Plato</option><option>Base de Madera para Parrilla</option>
-            <option>Tabla de Madera para Picar</option><option>Trípode</option><option>Delantal de Jeans</option>
-          </optgroup>
-          <optgroup label="➕ Otro">
-            <option value="otro">Otro (escribir)</option>
-          </optgroup>
-        </select>
-        <div class="errmsg" id="e-prod">Seleccioná el producto</div>
-      </div>
-      <div class="extra-hide" id="f-otro">
-        <div class="fld">
-          <label>Especificá el producto</label>
-          <input type="text" id="otro-desc" placeholder="Nombre del producto">
-        </div>
-      </div>
-      <div class="fld">
-        <label>Cantidad</label>
-        <input type="number" id="cantidad" value="1" min="1">
-      </div>
+```
+<!-- Venta producto -->
+<div class="extra-hide" id="f-venta">
+  <div class="fld">
+    <label>Producto <span class="req">*</span></label>
+    <select id="producto" onchange="toggleOtro(this.value)">
+      <option value="">— Seleccionar producto —</option>
+      <optgroup label="🔥 Parrillas">
+        <option>Parrilla Tambor Chica - Mesada Madera</option>
+        <option>Parrilla Tambor Mediana - Mesada Madera</option>
+        <option>Parrilla Tambor Mediana - Mesada Chapa</option>
+        <option>Parrilla Tambor Grande Normal</option>
+        <option>Parrilla Tambor Grande Premium</option>
+        <option>Parrilla Medio Tambor</option>
+        <option>Parrilla Medio Tambor con Rueditas</option>
+        <option>Parrilla Circular 50cm sin Ruedas</option>
+        <option>Parrilla Circular 50cm con Ruedas</option>
+        <option>Parrilla de Piso Club Libertad</option>
+        <option>Parrilla de Piso Club Guaraní</option>
+        <option>Parrilla de Piso Club Olimpia</option>
+        <option>Parrilla de Piso Club Cerro</option>
+        <option>Parrilla de Piso Club Luque</option>
+        <option>Parrilla 40cm altura 83cm</option>
+        <option>Parrilla 40cm 3 Patas con Porta Costillar</option>
+        <option>Parrillita de Mesa Carbonera 20x26</option>
+        <option>Parrillita de Mesa Carbonera 39x29</option>
+        <option>Parrillita de Mesa Verde con Marrón</option>
+        <option>Fogonero Chico 30cm</option>
+        <option>Fogonero Mediano 54cm</option>
+        <option>Fogonero Grande 59cm</option>
+        <option>Fogonero Cuadrado con Accesorios</option>
+      </optgroup>
+      <optgroup label="🛠️ Kit Parrillero">
+        <option>Palita (modelo nuevo)</option>
+        <option>Atizador (modelo nuevo)</option>
+        <option>Pinza para Carbón</option>
+        <option>Combo Parrillero</option>
+        <option>Smasher 10cm</option>
+        <option>Smasher 11cm</option>
+        <option>Smasher 12cm</option>
+        <option>Espadín 72cm</option>
+        <option>Espumadera</option>
+        <option>Cucharón</option>
+      </optgroup>
+      <optgroup label="🍳 Bandejas y Asaderas">
+        <option>Asadera 23x33</option><option>Asadera 30x21</option><option>Asadera 41x31</option>
+        <option>Asadera 46x59</option><option>Asadera 59x46</option>
+        <option>Bandeja 22x22</option><option>Bandeja 25x25</option><option>Bandeja 27x27</option>
+        <option>Bandeja Rica 37x21</option><option>Bandeja 35x29</option>
+        <option>Bandeja 40x40</option><option>Bandeja 40x51</option><option>Bandeja 44x30</option>
+        <option>Bandeja 49x39</option><option>Bandeja 50x50</option>
+        <option>Bandeja 60x40</option><option>Bandeja 60x45</option>
+        <option>Bandeja Panadera 59x70</option><option>Bandeja Panadera 70x58</option>
+        <option>Budinera 25x13</option><option>Budinera 30x12</option>
+        <option>Budinera 35x10</option><option>Budinera 36x11</option><option>Budinera 23x13</option>
+        <option>Bandeja Pizzera 29cm</option><option>Bandeja Pizzera 31cm</option>
+        <option>Bandeja para Donas 35x26</option><option>Molde Cupcake</option>
+        <option>Chupinera Individual</option><option>Chupinera 21x27</option>
+        <option>Chupinera 35x26</option><option>Chupinera 36x26</option><option>Chupinera 60x40</option>
+        <option>Plancheta Mini 18x12</option><option>Plancheta 40x18</option>
+        <option>Plancheta 45x30</option><option>Plancheta 46x30</option><option>Plancheta 50x26</option>
+        <option>Provoletera</option><option>Wok 32cm</option><option>Wok 36cm</option>
+        <option>Colador 26cm</option><option>Ensaladera</option><option>Bowl con Tapa</option><option>Cazuelita 15cm</option>
+      </optgroup>
+      <optgroup label="⚫ Discos y Paelleras">
+        <option>Disco 35cm</option><option>Disco 51cm sin Tapa</option><option>Disco 51cm con Tapa</option>
+        <option>Disco 52cm</option><option>Disco 53cm</option><option>Disco 58x58 con Tapa</option>
+        <option>Disco 81cm (Arado)</option><option>Paellera Personal 16cm</option>
+        <option>Paellera 35cm con Tapa</option><option>Paellera 50cm</option>
+        <option>Soporte para Disco</option><option>Porta Costillar</option>
+      </optgroup>
+      <optgroup label="☕ Jarritos y Jarras">
+        <option>Jarrito N°8 sin Diseño</option><option>Jarrito N°8 con Diseño</option>
+        <option>Jarrito N°9 sin Diseño</option><option>Jarrito N°9 con Diseño</option>
+        <option>Jarrito N°10 sin Diseño</option><option>Jarrito N°10 con Diseño</option>
+        <option>Jarra 1 Litro sin Diseño</option><option>Jarra 1 Litro con Diseño</option>
+        <option>Lechera</option><option>Materito</option>
+        <option>Chopera sin Diseño</option><option>Chopera con Diseño</option>
+        <option>Compotera</option><option>Salserito Chico</option><option>Salserito Grande</option>
+      </optgroup>
+      <optgroup label="🍽️ Platos">
+        <option>Plato Hondo 23cm</option><option>Plato Hondo 25cm</option><option>Plato Hondo 28cm</option>
+        <option>Plato Playo 23cm</option><option>Plato Playo 25cm</option><option>Plato Playo 28cm</option>
+        <option>Plato para Asado grande</option><option>Platito 15cm</option>
+        <option>Plato Nidal con Salsero</option><option>Plato Olimpia 23cm</option>
+      </optgroup>
+      <optgroup label="🫖 Tazas">
+        <option>Taza Enlozada sin Diseño</option><option>Taza Enlozada con Diseño</option>
+      </optgroup>
+      <optgroup label="🪧 Carteles y Decoración">
+        <option>Cartel Parrilla 100% Paraguaya</option><option>Cartel Coca Cola</option>
+        <option>Cartel El Mejor Asado lo Hace mi Papá</option><option>Cartel Asado otros modelos</option>
+        <option>Cartel para Jardín grande</option><option>Cartelito para Jardín pequeño</option>
+        <option>Cartel WiFi</option><option>Cartel Sanitario</option><option>Cartel Harley Davidson</option>
+        <option>Cuadro Quincho 20x20</option><option>Cuadro Quincho 30x20</option><option>Cuadro Quincho 40x30</option>
+        <option>Crucifijo Oxidado</option><option>Porta Llaves diseño Búho</option>
+        <option>Porta Espiral</option><option>Porta Velas</option><option>Porta Servilletas</option>
+        <option>Porta Plato</option><option>Base de Madera para Parrilla</option>
+        <option>Tabla de Madera para Picar</option><option>Trípode</option><option>Delantal de Jeans</option>
+      </optgroup>
+      <optgroup label="➕ Otro">
+        <option value="otro">Otro (escribir)</option>
+      </optgroup>
+    </select>
+    <div class="errmsg" id="e-prod">Seleccioná el producto</div>
+  </div>
+  <div class="extra-hide" id="f-otro">
+    <div class="fld">
+      <label>Especificá el producto</label>
+      <input type="text" id="otro-desc" placeholder="Nombre del producto">
     </div>
+  </div>
+  <div class="fld">
+    <label>Cantidad</label>
+    <input type="number" id="cantidad" value="1" min="1">
+  </div>
+</div>
 
-    <!-- Servicio enlozado -->
-    <div class="extra-hide" id="f-enlozado">
-      <div class="fld">
-        <label>Descripción del servicio <span class="req">*</span></label>
-        <input type="text" id="desc-enlozado" placeholder="Ej: Enlozado parrilla tambor grande, negro">
-      </div>
-    </div>
+<!-- Servicio enlozado -->
+<div class="extra-hide" id="f-enlozado">
+  <div class="fld">
+    <label>Descripción del servicio <span class="req">*</span></label>
+    <input type="text" id="desc-enlozado" placeholder="Ej: Enlozado parrilla tambor grande, negro">
+  </div>
+  <div class="fld">
+    <label>Medida del producto (cm)</label>
+    <input type="text" id="medida-enlozado" placeholder="Ej: 60x40, 50cm diametro, 30x20x15">
+  </div>
+  <div class="fld">
+    <label>Precio por metro cuadrado (Gs)</label>
+    <input type="number" id="precio-m2" placeholder="0" min="0" oninput="calcPrecioFinal()">
+  </div>
+  <div class="fld">
+    <label>Metros cuadrados</label>
+    <input type="number" id="metros2" placeholder="0" min="0" step="0.01" oninput="calcPrecioFinal()">
+  </div>
+  <div class="fld" style="background:#EEF2FF;border-radius:10px;margin:0 8px 8px">
+    <label style="color:#1B2D6B">Precio calculado (Gs)</label>
+    <input type="number" id="precio-calculado" placeholder="0" readonly style="background:#EEF2FF;font-weight:700;color:#1B2D6B;border-color:#1B2D6B">
+  </div>
+</div>
+```
 
-    <!-- Otros servicios -->
-    <div class="extra-hide" id="f-servicio">
-      <div class="fld">
-        <label>Descripción del servicio <span class="req">*</span></label>
-        <input type="text" id="desc-servicio" placeholder="Descripción del trabajo realizado">
-      </div>
-    </div>
   </div>
 
   <div class="card">
@@ -341,6 +354,7 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 </div>
 
 <!-- STEP 3 - RESUMEN -->
+
 <div class="step" id="step-3">
   <div class="resumen show" id="resumen">
     <div class="resumen-hdr">
@@ -361,6 +375,7 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 </div>
 
 <!-- SUCCESS -->
+
 <div class="success" id="success">
   <div class="success-logo">
     <img src="data:image/png;base64,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" alt="Enlozadora Paraguaya">
@@ -376,7 +391,7 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 </div>
 
 <script>
-var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx1X7Y8FIWe-XS-y9egR5Tvmv0aoE6rbJBQRwRP9s5vI71POXyBJZbqccaHIxuWowrv/exec";
+var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyi90mzbSo5NR2hVVsANRdGL-z-cd2t-edamJ5Za2ORL8VhUfoQc7BXNuJYG_BFGFLf/exec";
 var step = 1;
 var tipo = '';
 var condicion = '';
@@ -434,10 +449,9 @@ function setTipo(t) {
   tipo = t;
   document.querySelectorAll('.tipo-btn').forEach(function(b){ b.classList.remove('active'); });
   event.target.closest('.tipo-btn').classList.add('active');
-  ['f-venta','f-enlozado','f-servicio'].forEach(function(id){ document.getElementById(id).classList.remove('show'); });
+  ['f-venta','f-enlozado'].forEach(function(id){ document.getElementById(id).classList.remove('show'); });
   if(t==='Venta Producto') document.getElementById('f-venta').classList.add('show');
   else if(t==='Servicio Enlozado') document.getElementById('f-enlozado').classList.add('show');
-  else document.getElementById('f-servicio').classList.add('show');
 }
 
 function toggleOtro(v) {
@@ -459,13 +473,32 @@ function calcSaldo() {
   document.getElementById('saldo-display').textContent = 'Gs. '+Math.max(0,tot-ent).toLocaleString('es-PY');
 }
 
+function calcPrecioFinal() {
+  var pm2 = parseFloat(document.getElementById('precio-m2').value)||0;
+  var m2  = parseFloat(document.getElementById('metros2').value)||0;
+  var calc = pm2 * m2;
+  document.getElementById('precio-calculado').value = calc;
+  // Auto-fill total if empty
+  if (calc > 0) {
+    document.getElementById('total').value = calc;
+    calcSaldo();
+  }
+}
+
 function getDesc() {
   if(tipo==='Venta Producto'){
     var p = document.getElementById('producto').value;
     return p==='otro' ? document.getElementById('otro-desc').value : p;
   }
-  if(tipo==='Servicio Enlozado') return document.getElementById('desc-enlozado').value;
-  return document.getElementById('desc-servicio').value;
+  if(tipo==='Servicio Enlozado'){
+    var desc = document.getElementById('desc-enlozado').value;
+    var medida = document.getElementById('medida-enlozado').value;
+    var m2 = document.getElementById('metros2').value;
+    if(medida) desc += ' | Medida: ' + medida;
+    if(m2) desc += ' | M2: ' + m2;
+    return desc;
+  }
+  return '';
 }
 
 async function enviar() {
@@ -506,5 +539,6 @@ function resetForm() {
 
 document.getElementById('fecha').valueAsDate = new Date();
 </script>
+
 </body>
 </html>
